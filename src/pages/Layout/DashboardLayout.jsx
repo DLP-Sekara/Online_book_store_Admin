@@ -88,12 +88,6 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     switch (selectedIcon) {
-      case "home":
-        navigateTo("/");
-        break;
-      case "all-books":
-        navigateTo("all-books");
-        break;
       case "help":
         navigateTo("help");
         break;
@@ -243,60 +237,6 @@ const DashboardLayout = () => {
 
         {/* support icons */}
         <div className="flex flex-row items-center gap-8">
-          <Tooltip title="Home">
-            <Link
-              className="cursor-pointer"
-              to="/"
-              onClick={() => handleIconClick("home")}
-            >
-              <HomeIcon
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "home" ? "#0d7cff" : "#939292"}
-              />
-            </Link>
-          </Tooltip>
-
-          <Tooltip title="All Books">
-            <div
-              className="cursor-pointer"
-              onClick={async () => {
-                //await navigateToDashboard();
-                handleIconClick("all-books");
-              }}
-            >
-              <DashboardDropdownIcon
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "all-books" ? "#0d7cff" : "#939292"}
-              />
-            </div>
-          </Tooltip>
-
-          <Tooltip title="Cart">
-            <div
-              className="cursor-pointer"
-              onClick={async () => {
-                //await navigateToDashboard();
-                //handleIconClick("Cart");
-                setOpenCartDrawer(true);
-              }}
-            >
-              <CartIcon className="h-6 w-6 sm:h-8 sm:w-8" color={"#939292"} />
-            </div>
-          </Tooltip>
-
-          <Tooltip title="Help">
-            <Link
-              className="cursor-pointer"
-              to="/support"
-              onClick={() => handleIconClick("help")}
-            >
-              <HelpIconNew
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "help" ? "#0d7cff" : "#FFA234"}
-              />
-            </Link>
-          </Tooltip>
-
           <UserColorProfile
             name={user?.username || "N Z"}
             color={user?.profileColor}
