@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { NotificationContextProvider } from "./context/NotificationContext.jsx";
 import { HomeAndNotificationContextProvider } from "./context/HomeAndNotificationContext.jsx";
 import { UserContextProvider } from "./context/UserContext.jsx";
+import { BookContextProvider } from "./context/BookContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")).render(
       <NotificationContextProvider>
         <HomeAndNotificationContextProvider>
           <UserContextProvider>
-            <App />
+            <BookContextProvider>
+              <App />
+            </BookContextProvider>
           </UserContextProvider>
         </HomeAndNotificationContextProvider>
       </NotificationContextProvider>

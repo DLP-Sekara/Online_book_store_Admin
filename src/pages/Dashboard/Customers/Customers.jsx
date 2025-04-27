@@ -4,12 +4,13 @@ import NoDataAnim from "../../../components/nodataAnim/NoDataAnim";
 import UserCard from "./userCard/UserCard";
 import SignInServices from "../../../services/SignInServices";
 import { UserContext } from "../../../context/UserContext";
-import { Pagination } from "antd";
+import { Input, Pagination } from "antd";
 import CustomButton from "../../../components/buttons/CustomButton";
 import { useNavigate } from "react-router-dom";
 import ActionDialog from "../../../components/popups/ActionDialog";
 import AdminManage from "../../AdminManage/AdminManage";
 import { NotificationContext } from "../../../context/NotificationContext";
+import SearchOutline from "../../../assets/images/svg/common/SearchOutline";
 
 const Customers = () => {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const Customers = () => {
   useEffect(() => {
     fetchUsers();
   }, [filters]);
+
   const fetchUsers = async () => {
     setLoading(true);
     const response = await getAllUsers(filters);
@@ -63,11 +65,24 @@ const Customers = () => {
     }));
     updateFilters({ page: page, perPage: pageSize });
   };
+  const handleTemplateChange = (e) => {
+    updateFilters({ customerName: e.target.value });
+  };
   return (
     <div className="h-full w-full p-2">
       {/* users list */}
-      <div className="mb-10 flex h-[90vh] flex-col overflow-y-auto">
-        <div className="flex w-full justify-end">
+      <div className="mb-10 mt-5 flex h-[90vh] flex-col overflow-y-auto">
+        <div className="flex w-full justify-between pb-3">
+          <div>
+            <Input
+              className="w-[300px]"
+              size="default"
+              placeholder="Search Customers"
+              maxLength={60}
+              suffix={<SearchOutline className="flex w-[20px]" />}
+              onChange={handleTemplateChange}
+            />
+          </div>
           <CustomButton
             type="primary"
             className="mb-4"
