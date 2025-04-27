@@ -66,6 +66,7 @@ const SignInView = () => {
       if (response.responseType === "success") {
         setAdmin(response?.output?.data);
         setLocalStorageData("adminDetails", response?.output?.data);
+        setLocalStorageData("selectedSegment", "Orders");
       } else if (response.responseType === "fail") {
         openNotification("error", response?.output?.message);
       } else if (response.responseType === "error") {

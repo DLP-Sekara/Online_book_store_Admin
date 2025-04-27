@@ -20,6 +20,10 @@ import SideDrawer from "../../components/side_drawers/SideDrawer";
 // import CartBody from "../../components/CartBody/CartBody";
 import { NotificationContext } from "../../context/NotificationContext";
 import SignInServices from "../../services/SignInServices";
+import {
+  getLocalStoragedata,
+  setLocalStorageData,
+} from "../../helpers/StorageHelper";
 const { Text } = Typography;
 const DashboardLayout = () => {
   const {
@@ -44,7 +48,7 @@ const DashboardLayout = () => {
     {
       label: (
         <Text
-          className={`text-secondaryTwo flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
+          className={`${selectedSegment === "Orders" ? "text-primary" : "text-secondaryTwo"} flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
         >
           Orders
         </Text>
@@ -54,7 +58,7 @@ const DashboardLayout = () => {
     {
       label: (
         <Text
-          className={`text-secondaryTwo flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
+          className={`${selectedSegment === "Customers" ? "text-primary" : "text-secondaryTwo"} flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
         >
           Customers
         </Text>
@@ -64,7 +68,7 @@ const DashboardLayout = () => {
     {
       label: (
         <Text
-          className={`text-secondaryTwo flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
+          className={`${selectedSegment === "Books" ? "text-primary" : "text-secondaryTwo"} flex w-32 items-center justify-center p-1 font-semibold sm:w-40`}
         >
           Books
         </Text>
@@ -73,7 +77,11 @@ const DashboardLayout = () => {
     },
   ];
   useEffect(() => {
-    if (selectedSegment === "Orders") {
+    setSelectedSegment(getLocalStoragedata("selectedSegment"));
+  }, []);
+
+  useEffect(() => {
+    if (selectedSegment === "Orders" || selectedSegment === "") {
       navigateTo("orders");
     } else if (selectedSegment === "Customers") {
       navigateTo("customers");
@@ -88,12 +96,6 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     switch (selectedIcon) {
-      case "home":
-        navigateTo("/");
-        break;
-      case "all-books":
-        navigateTo("all-books");
-        break;
       case "help":
         navigateTo("help");
         break;
@@ -174,129 +176,23 @@ const DashboardLayout = () => {
           </Link>
         </div>
 
-        {/* search books */}
         <div className="">
-          <Popover
-            open={popoverVisible}
-            content={
-              <div className="h-auto w-[200px] md:h-[440px] md:w-[360px]">
-                {/* <SearchPopoverContent
-                  setIsClosePopover={() => setPopoverVisible(false)}
-                  handlePopoverVisibleChange={handlePopoverVisibleChange}
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                  onClose={handleClearSearch} // Clear search field and close popover
-                /> */}
-              </div>
-            }
-            trigger="click"
-            arrow={false}
-            //onOpenChange={handlePopoverVisibleChange}
-          >
-            <div
-              className=""
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "inherit")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "inherit")
-              }
-              onClick={() => {
-                if (block) {
-                  navigate("/subscription-expired"); // Redirect to subscription page if user is blocked
-                }
+          {/* segmented area */}
+          <div className="flex h-fit w-full items-center justify-start">
+            <Segmented
+              size="medium"
+              options={segmentOptions}
+              value={selectedSegment}
+              className="bg-secondarySix flex p-1"
+              onChange={(e) => {
+                setSelectedSegment(e);
+                setLocalStorageData("selectedSegment", e);
               }}
-            >
-              <ConfigProvider
-                theme={{
-                  token: {
-                    colorBgContainer: "#FFFFFF",
-                    borderRadius: "9999px",
-                    itemColor: "#FFFFFF",
-                  },
-                  components: {
-                    Input: {
-                      activeBorderColor: "primary",
-                    },
-                  },
-                }}
-              >
-                <div className="flex flex-row rounded-full border-2 border-primary">
-                  <Input.Search
-                    allowClear
-                    size="normal"
-                    className="custom-search w-36 items-center text-2xl placeholder:text-3xl placeholder:font-semibold md:w-60 xl:w-96"
-                    variant="borderless"
-                    placeholder="Search Books by book's name"
-                    maxLength={60}
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onSearch={handleSearch}
-                    onClear={handleClearSearch}
-                    enterButton
-                  />
-                </div>
-              </ConfigProvider>
-            </div>
-          </Popover>
+            />
+          </div>
         </div>
-
         {/* support icons */}
         <div className="flex flex-row items-center gap-8">
-          <Tooltip title="Home">
-            <Link
-              className="cursor-pointer"
-              to="/"
-              onClick={() => handleIconClick("home")}
-            >
-              <HomeIcon
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "home" ? "#0d7cff" : "#939292"}
-              />
-            </Link>
-          </Tooltip>
-
-          <Tooltip title="All Books">
-            <div
-              className="cursor-pointer"
-              onClick={async () => {
-                //await navigateToDashboard();
-                handleIconClick("all-books");
-              }}
-            >
-              <DashboardDropdownIcon
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "all-books" ? "#0d7cff" : "#939292"}
-              />
-            </div>
-          </Tooltip>
-
-          <Tooltip title="Cart">
-            <div
-              className="cursor-pointer"
-              onClick={async () => {
-                //await navigateToDashboard();
-                //handleIconClick("Cart");
-                setOpenCartDrawer(true);
-              }}
-            >
-              <CartIcon className="h-6 w-6 sm:h-8 sm:w-8" color={"#939292"} />
-            </div>
-          </Tooltip>
-
-          <Tooltip title="Help">
-            <Link
-              className="cursor-pointer"
-              to="/support"
-              onClick={() => handleIconClick("help")}
-            >
-              <HelpIconNew
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                color={selectedIcon === "help" ? "#0d7cff" : "#FFA234"}
-              />
-            </Link>
-          </Tooltip>
-
           <UserColorProfile
             name={user?.username || "N Z"}
             color={user?.profileColor}
@@ -329,19 +225,6 @@ const DashboardLayout = () => {
         className="mt-[60px] w-full flex-1"
         style={{ backgroundColor: "themeColor" }}
       >
-        {/* segmented area */}
-        <div className="flex h-fit w-full items-center justify-start pl-2 pt-3">
-          <Segmented
-            size="medium"
-            options={segmentOptions}
-            value={selectedSegment}
-            className="bg-secondarySix flex p-1"
-            onChange={(e) => {
-              console.log(e);
-              setSelectedSegment(e);
-            }}
-          />
-        </div>
         <Outlet />
       </div>
 

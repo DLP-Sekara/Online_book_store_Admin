@@ -56,10 +56,41 @@ const UserCard = ({ user, fetchData, activeUserCount }) => {
                     >
                       <circle cx="3" cy="3" r="3" fill="#939292" />
                     </svg>
-                    {user?.roleName}
+                    Role: {user?.roleName}
+                  </Text>
+                </div>
+                <div className="flex w-full flex-row items-center gap-2">
+                  <Text className="text-secondaryThree flex flex-row items-center gap-1 text-xxs font-normal md:text-xs lg:text-sm">
+                    <svg
+                      width="6"
+                      height="6"
+                      viewBox="0 0 6 6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="3" cy="3" r="3" fill="#939292" />
+                    </svg>
+                    Orders : {user?.orderCount}
                   </Text>
                 </div>
               </div>
+
+              {/* <div className="flex w-full flex-col items-center justify-start xs:min-w-60 md:w-1/3 md:flex-row md:gap-4">
+                <div className="flex w-full flex-row items-center gap-2">
+                  <Text className="text-secondaryThree flex flex-row items-center gap-1 text-xxs font-normal md:text-xs lg:text-sm">
+                    <svg
+                      width="6"
+                      height="6"
+                      viewBox="0 0 6 6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="3" cy="3" r="3" fill="#939292" />
+                    </svg>
+                    {user?.roleName}
+                  </Text>
+                </div>
+              </div> */}
 
               <div className="flex w-full flex-col items-center justify-start xs:min-w-60 md:w-1/3 md:flex-row md:gap-4">
                 <div className="flex w-full flex-row items-center gap-2">
@@ -77,7 +108,7 @@ const UserCard = ({ user, fetchData, activeUserCount }) => {
           <div className="flex h-full flex-row items-center justify-center gap-1 p-2 md:w-[15%] lg:gap-8">
             <DeleteOutline
               onClick={() => {
-                setOpenDeleteCustomer(true);
+                setOpenDeleteAdmin(true);
               }}
               className="flex w-[20px]"
             />

@@ -11,6 +11,7 @@ import CalendarOutline from "../../../../assets/images/svg/customers/CalendarOut
 import CountryOutline from "../../../../assets/images/svg/customers/CountryOutline";
 import { formatDateWithDayExtension } from "../../../../helpers/DateFormatHelper";
 import SignInServices from "../../../../services/SignInServices";
+import CartIcon from "../../../../assets/images/svg/MainLayout/CartIcon";
 
 const { Text } = Typography;
 
@@ -131,6 +132,15 @@ const UserView = ({ user, fetchData, type }) => {
               </Text>
               <Text className="flex flex-row flex-wrap text-xs font-bold md:text-sm">
                 {userData?.country || "-"}
+              </Text>
+            </div>
+            <div className="border-basicBorder flex flex-row gap-2 rounded border p-2">
+              <Text className="text-secondaryThree flex w-28 items-center gap-2 text-xxs font-normal md:w-32 lg:text-xs">
+                <CartIcon className="flex w-[20px]" color={"#939292"} />
+                Orders
+              </Text>
+              <Text className="flex flex-row flex-wrap text-xs font-bold md:text-sm">
+                {userData?.orderCount || "-"}
               </Text>
             </div>
           </div>
