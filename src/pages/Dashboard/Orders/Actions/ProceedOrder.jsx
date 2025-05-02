@@ -201,7 +201,7 @@ const ProceedOrder = ({ order }) => {
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  title={item?.book_id.title}
+                  title={item?.book_id?.title}
                   description={`Author: ${item.book_id?.author}`}
                 />
                 <div>
