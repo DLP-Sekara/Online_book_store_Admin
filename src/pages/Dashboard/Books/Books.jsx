@@ -65,7 +65,7 @@ const Books = () => {
     }));
     updateFilters({ page: page, perPage: pageSize });
   };
-  const handleTemplateChange = (e) => {
+  const handleSearchBook = (e) => {
     updateFilters({ searchTerm: e.target.value });
   };
   return (
@@ -79,7 +79,7 @@ const Books = () => {
               placeholder="Search Books"
               maxLength={60}
               suffix={<SearchOutline className="flex w-[20px]" />}
-              onChange={handleTemplateChange}
+              onChange={handleSearchBook}
             />
           </div>
           <CustomButton
