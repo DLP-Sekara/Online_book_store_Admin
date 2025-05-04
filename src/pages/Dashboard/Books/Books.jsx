@@ -70,7 +70,7 @@ const Books = () => {
   };
   return (
     <div className="h-full w-full p-2">
-      <div className="mb-10 mt-5 flex h-[90vh] flex-col overflow-y-auto">
+      <div className="mt-5 flex h-fit flex-col !overflow-y-hidden">
         <div className="flex w-full justify-between pb-3">
           <div>
             <Input
@@ -98,9 +98,9 @@ const Books = () => {
             ))}
           </div>
         ) : (
-          <>
+          <div className="h-full overflow-y-auto">
             {books?.length !== 0 ? (
-              <div className="mb-10 flex flex-col gap-3 overflow-y-hidden">
+              <div className="mb-4 flex flex-col gap-3 overflow-y-hidden">
                 {books?.map((book, index) => (
                   <BookCard book={book} key={index} fetchData={fetchBooks} />
                 ))}
@@ -108,9 +108,9 @@ const Books = () => {
             ) : (
               <NoDataAnim message="No users to display." />
             )}
-          </>
+          </div>
         )}
-        <div className="fixed bottom-0 left-0 z-50 flex w-full justify-end bg-white p-4 px-4 md:px-12">
+        <div className="bottom-0 left-0 z-50 flex w-full justify-end px-4 py-2 md:px-12">
           {pagination.totalCount > 10 && (
             <Pagination
               current={pagination.page}
@@ -126,8 +126,8 @@ const Books = () => {
             open={addNewBookDrawer}
             handleClose={() => {
               setAddNewBookDrawer(false);
-            }} 
-            width={"900px"} 
+            }}
+            width={"900px"}
           >
             <CreateBook
               type={"CREATE"}

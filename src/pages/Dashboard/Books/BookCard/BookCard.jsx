@@ -73,7 +73,7 @@ const BookCard = ({ book, fetchData }) => {
                   <span className="flex w-[50%] justify-end font-semibold">
                     Rs.
                   </span>
-                  <span className="flex w-[50%] justify-start font-semibold">
+                  <span className="flex w-[50%] justify-start font-semibold block truncate">
                     {book?.price}
                   </span>
                 </Text>
