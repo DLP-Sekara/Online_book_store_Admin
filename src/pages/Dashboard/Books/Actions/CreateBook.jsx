@@ -72,10 +72,8 @@ const CreateBook = ({ book, type, handleClose }) => {
       formData.append("publisher", values.publisher);
       formData.append("pub_year", values.pub_year);
       formData.append("isAwarded", values.isAwarded || false);
-      formData.append("rating", values.rating);
       formData.append("number_of_pages", values.number_of_pages);
       formData.append("format", values.format);
-      formData.append("reviews", values.reviews);
 
       // Append types array one by one
       bookTypes.forEach((type) => {
@@ -388,13 +386,13 @@ const CreateBook = ({ book, type, handleClose }) => {
           <Switch />
         </Form.Item>
 
-        <Form.Item name="rating" label="Rating">
+        {/* <Form.Item name="rating" label="Rating">
           <Rate allowHalf />
         </Form.Item>
 
         <Form.Item name="reviews" label="Reviews">
           <TextArea rows={3} placeholder="Enter reviews or comments" />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
           <Space>

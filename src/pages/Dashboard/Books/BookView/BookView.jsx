@@ -5,9 +5,7 @@ const { Title, Paragraph } = Typography;
 
 const BookView = ({ book }) => {
   return (
-    <Card 
-      style={{ maxWidth: 900, margin: "auto", padding: 24 }}
-    >
+    <Card style={{ maxWidth: 900, margin: "auto", padding: 24 }}>
       <Title level={2}>{book.title}</Title>
 
       <div
@@ -28,7 +26,7 @@ const BookView = ({ book }) => {
         bordered
         column={1}
         size="middle"
-        labelStyle={{ fontWeight: "bold", width: 200 }}
+        styles={{ fontWeight: "bold", width: 200 }}
       >
         <Descriptions.Item label="Author">{book.author}</Descriptions.Item>
         <Descriptions.Item label="Publisher">
@@ -66,9 +64,7 @@ const BookView = ({ book }) => {
             View PDF
           </a>
         </Descriptions.Item>
-        <Descriptions.Item label="Review">
-          <Paragraph>{book.reviews}</Paragraph>
-        </Descriptions.Item>
+
         <Descriptions.Item label="Description">
           <Paragraph>{book.description}</Paragraph>
         </Descriptions.Item>
