@@ -31,8 +31,7 @@ const Orders = () => {
     perPage: 10,
   });
   const { getAllOrders } = OrderService();
-  const navigateTo = useNavigate();
-
+ 
   useEffect(() => {
     fetchOrders();
   }, [filters]);
